@@ -168,10 +168,10 @@ void OAN::dynamics(){
 	V2_float des_crackle = edivV2(subV2(des_snap, temp_snap), TSTEP);	//here temp denotes actual computed dynamics of drone
 
 	__crackle_raw = des_crackle;
-	__snap_raw = addV2(emulV2(SNAP_GAIN, __crackle_raw), temp_snap);
-	__jerk_raw = addV2(emulV2(JERK_GAIN, __snap_raw), temp_jerk);
-	__accel_raw = addV2(emulV2(ACCEL_GAIN, __jerk_raw), temp_accel);
-	__vel_raw = addV2(emulV2(VEL_GAIN, __accel_raw), curr_vel);
+	__snap_raw = emulV2(TSTEP, addV2(emulV2(SNAP_GAIN, __crackle_raw), temp_snap));
+	__jerk_raw = emulV2(TSTEP, addV2(emulV2(JERK_GAIN, __snap_raw), temp_jerk));
+	__accel_raw = emulV2(TSTEP, addV2(emulV2(ACCEL_GAIN, __jerk_raw), temp_accel));
+	__vel_raw = emulV2(TSTEP, addV2(emulV2(VEL_GAIN, __accel_raw), curr_vel));
 
 	// __vel_target = des_vel;
 	__vel_target = __vel_raw;

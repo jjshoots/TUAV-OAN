@@ -2,6 +2,8 @@
 
 #include <string>
 #include <iostream>
+#pragma once
+
 #include <vector>
 #include <bits/stdc++.h>
 #include <math.h>
@@ -19,6 +21,8 @@ class SLAM{
 		SLAM();
 		~SLAM();
 
+		void update_map();
+
 	private:
 		struct V2_int{
 			int x;
@@ -29,43 +33,26 @@ class SLAM{
 		};
 
 
+		const int HEIGHT_RANGE = 3;
 
+
+		vector<V2_int> local_map;
+
+		// callback stuff n tings
 		bool __local_targ = 0;
-		float hgt_offset = 0;
-		float height_target = 0;
-		float height_current = 0;
+		float __hgt_offset = 0;
+		float __height_target = 0;
+		float __height_current = 0;
+
+		int __PC_update = 0;		// last checked pointcloud size
 
 
 
 
-		void __oan_func_cb(const std_msgs::Int16::ConstPtr& msg){
-			oan_func = *msg;
-			if(oan_func.data == 0){
-				__local_targ = 0;
-			}else
-			if(oan_func.data == 1){
-				__local_targ = 1;
-			}else
-			if(oan_func.data == 3){
-				hgt_offset = height_current;
-			}
-		}
-		void __goal_pos_cb(const geometry_msgs::Point::ConstPtr& msg){
-			goal_pos_raw = *msg;
-			if(!__local_targ){
-				height_target = goal_pos_raw.z + hgt_offset;
-			}else{
-				height_target = goal_pos_raw.z + height_current;
-			}
-		}
-		void __curr_pos_cb(const geometry_msgs::PoseStamped::ConstPtr& msg){
-		    curr_pos_raw = *msg;
-		    height_current = -curr_pos_raw.pose.position.z;
-		}
-		void __point_cloud_cb(const sensor_msgs::PointCloud2::ConstPtr& msg){
-			point_cloud = *msg;
-		}
-
+		void __oan_func_cb(const std_msgs::Int16::ConstPtr& msg);
+		void __goal_pos_cb(const geometry_msgs::Point::ConstPtr& msg);
+		void __curr_pos_cb(const geometry_msgs::PoseStamped::ConstPtr& msg);
+		void __point_cloud_cb(const sensor_msgs::PointCloud2::ConstPtr& msg);
 
 
 

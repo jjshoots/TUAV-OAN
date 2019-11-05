@@ -86,10 +86,10 @@ private:
 	const float OBS_RAD = 5;
 	const float PROX = 3.0;
 	const float MAX_VEL = 3;
-	const float SNAP_GAIN = 0.1;
-	const float JERK_GAIN = 0.1;
-	const float ACCEL_GAIN = 0.05;
-	const float VEL_GAIN = 0.05;
+	const float SNAP_GAIN = 1;
+	const float JERK_GAIN = 1;
+	const float ACCEL_GAIN = 0.5;
+	const float VEL_GAIN = 0.5;
 	const float VERT_VEL_GAIN = 0.8;
 	const float MAX_RISE_VEL = -1.0;
 	const float MAX_DESC_VEL = 0.5;
@@ -240,11 +240,6 @@ private:
     ros::Time last_request = ros::Time::now();
     float TSTEP = 1/LOOP_RATE;
 };
-
-
-//testing some stuff here
-
-//bla bla bla
 
 
 
