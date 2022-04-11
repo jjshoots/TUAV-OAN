@@ -1,0 +1,31 @@
+V2
+- Added in Velocity and Acceleration constraining in move.m and velocity.m
+
+V3
+- Added in Jerk constraining in velocity.m
+- Added in dynamics logging
+
+V4
+- Look at closest TWO obstacles
+- Modified distances.m to be a bit more efficient for concern.m
+- Added in Snap and Pop, renamed velocity.m to dynamics.m
+- Added ability to pull map from save files
+- Added yaw control
+- Avoidance vector for obstacles only kicks in when drone is less than 3 meters away from obstacle,
+	at magnitude of 1/3 of normalized vector
+	
+V5
+- Added in WORKING A* search algorithm, in heck_yes_a_star.m
+
+V6
+- Added in split and merge algorithm for A* search in split_and_merge.m
+- New algo does a* -> path -> waypoints -> target
+- Added in target parsing from waypoints
+- Considered done
+
+V7
+- Fixed split and merge forming NaN, identified NaN when y=mx algo used for line forming algo forms
+	vertical path, which causes m -> inf 
+
+V8
+- General bug fixes
